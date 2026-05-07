@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio — Mónica Lourdes Ventura Mejía</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F7F4EE;
+      --ink: #1C1C1A;
+      --ink-light: #5A5955;
+      --ink-muted: #9A9890;
+      --teal: #1D9E75;
+      --teal-light: #E1F5EE;
+      --teal-mid: #5DCAA5;
+      --blue: #185FA5;
+      --blue-light: #E6F1FB;
+      --blue-mid: #85B7EB;
+      --amber: #BA7517;
+      --amber-light: #FAEEDA;
+      --border: rgba(28,28,26,0.12);
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,244,238,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 400; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--ink-light); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* LAYOUT */
+    .container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+
+    /* HERO */
+    .hero {
+      padding: 5rem 0 4rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      border-bottom: 0.5px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .avatar {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      border: 2px solid var(--teal-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 38px; color: var(--teal);
+      flex-shrink: 0;
+    }
+    /* Uncomment and set src when you have your photo:
+    .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; } */
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .hero-text h1 em { font-style: italic; color: var(--teal); }
+    .hero-subtitle { font-size: 14px; color: var(--ink-light); margin-bottom: 14px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 11px; padding: 3px 10px;
+      border-radius: 20px;
+      background: white;
+      border: 0.5px solid var(--border);
+      color: var(--ink-light);
+    }
+
+    /* SECTIONS */
+    section { padding: 3.5rem 0; border-bottom: 0.5px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    .sec-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 6px;
+    }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    /* SOBRE MÍ */
+    .about-text {
+      font-size: 15px; line-height: 1.8;
+      color: var(--ink-light);
+      border-left: 2px solid var(--teal);
+      padding-left: 1.25rem;
+      max-width: 580px;
+    }
+
+    /* OBJETIVO */
+    .obj-box {
+      background: var(--blue-light);
+      border-left: 2px solid var(--blue);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      font-size: 15px; line-height: 1.8;
+      color: #0C447C;
+      max-width: 580px;
+    }
+
+    /* EXPERIENCIA */
+    .exp-card {
+      background: white;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: box-shadow 0.2s;
+    }
+    .exp-card:hover { box-shadow: 0 4px 20px rgba(28,28,26,0.08); }
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+    .exp-place { font-size: 16px; font-weight: 600; }
+    .exp-period {
+      font-size: 12px; padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--amber-light);
+      color: var(--amber);
+      border: 0.5px solid #EF9F27;
+    }
+    .exp-location { font-size: 13px; color: var(--ink-muted); margin-bottom: 1.25rem; }
+    .role-block { margin-bottom: 1.25rem; }
+    .role-block:last-of-type { margin-bottom: 0; }
+    .role-title {
+      font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--ink-light);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 0.5px dashed var(--border);
+    }
+    .func-list { padding-left: 18px; }
+    .func-list li { font-size: 14px; color: var(--ink-light); margin-bottom: 4px; line-height: 1.6; }
+    .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+    .tool {
+      font-size: 11px; padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--blue-light);
+      color: var(--blue);
+      border: 0.5px solid var(--blue-mid);
+    }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 9px; top: 10px; bottom: 10px;
+      width: 1px; background: var(--border);
+    }
+    .tl-item {
+      position: relative; margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .tl-item:nth-child(1) { animation-delay: 0.1s; }
+    .tl-item:nth-child(2) { animation-delay: 0.2s; }
+    .tl-item:nth-child(3) { animation-delay: 0.3s; }
+    .tl-item:nth-child(4) { animation-delay: 0.4s; }
+    .tl-dot {
+      position: absolute; left: -22px; top: 5px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--cream);
+    }
+    .tl-year { font-size: 11px; font-weight: 600; margin-bottom: 3px; }
+    .tl-name { font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+    .tl-desc { font-size: 13px; color: var(--ink-light); line-height: 1.6; }
+
+    /* TRABAJOS ACADÉMICOS */
+    .academic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .acad-card {
+      background: white;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      transition: box-shadow 0.2s;
+    }
+    .acad-card:hover { box-shadow: 0 4px 20px rgba(28,28,26,0.08); }
+    .acad-materia {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
+      background: var(--teal-light); color: #085041;
+      border: 0.5px solid var(--teal-mid);
+      display: inline-block; margin-bottom: 10px;
+    }
+    .acad-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .acad-desc { font-size: 13px; color: var(--ink-light); line-height: 1.5; margin-bottom: 12px; }
+    .photo-slot {
+      background: var(--cream);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      font-size: 12px; color: var(--ink-muted);
+      line-height: 1.5;
+    }
+    /* When you add a real image: */
+    .photo-slot img { width: 100%; border-radius: 6px; display: block; }
+
+    /* HABILIDADES */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+    }
+    .skill-card {
+      background: white;
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .skill-name { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+    .bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 5px; }
+    .bar-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+    .skill-level { font-size: 11px; color: var(--ink-muted); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      font-size: 12px;
+      color: var(--ink-muted);
+      border-top: 0.5px solid var(--border);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 520px) {
+      .hero { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .container { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Mónica Ventura</span>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#formacion">Formación</a></li>
+    <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#habilidades">Habilidades</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="avatar">MV
+        <!-- Para agregar tu foto, reemplaza "MV" con:
+             <img src="foto.jpg" alt="Mónica Ventura" />
+             y sube foto.jpg junto a este archivo en GitHub -->
+      </div>
+      <div class="hero-text">
+        <h1>Mónica Lourdes <em>Ventura Mejía</em></h1>
+        <p class="hero-subtitle">Estudiante de Licenciatura en Informática · Área Administrativa Hospitalaria</p>
+        <div class="tag-row">
+          <span class="tag">Bases de datos</span>
+          <span class="tag">Administración hospitalaria</span>
+          <span class="tag">Microsoft Excel</span>
+          <span class="tag">Gestión documental</span>
+          <span class="tag">Trabajo en equipo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi">
+      <p class="sec-label">Perfil</p>
+      <h2 class="sec-title">Sobre mí</h2>
+      <p class="about-text">
+        Soy Mónica Ventura, estudiante de Licenciatura en Informática con experiencia laboral en el área administrativa de un centro quirúrgico. Me caracterizo por ser responsable, organizada y por mantener una actitud de mejora continua. Poseo habilidades en manejo de información, trabajo en equipo y adaptación a entornos exigentes, lo que me ha permitido fortalecer tanto mis capacidades técnicas como personales.
+      </p>
+    </section>
+
+    <!-- OBJETIVO -->
+    <section id="objetivo">
+      <p class="sec-label">Objetivo</p>
+      <h2 class="sec-title">Objetivo profesional</h2>
+      <div class="obj-box">
+        Desarrollarme en el área de informática y administración, especialmente en el uso de tecnologías, aplicando mis conocimientos en entornos reales y fortaleciendo mis habilidades para contribuir de manera eficiente dentro de una organización.
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA -->
+    <section id="experiencia">
+      <p class="sec-label">Trayectoria</p>
+      <h2 class="sec-title">Experiencia profesional</h2>
+      <div class="exp-card">
+        <div class="exp-top">
+          <span class="exp-place">Centro Quirúrgico</span>
+          <span class="exp-period">2020 – 2026</span>
+        </div>
+        <p class="exp-location">Área Administrativa · Dos roles desempeñados</p>
+
+        <div class="role-block">
+          <p class="role-title">Rol 1 — Auxiliar de Estadísticas y Documentos Médicos</p>
+          <ul class="func-list">
+            <li>Digitación de ingresos y egresos de pacientes</li>
+            <li>Registro y actualización de expedientes clínicos</li>
+            <li>Organización y control de documentación médica</li>
+          </ul>
+        </div>
+
+        <div class="role-block">
+          <p class="role-title">Rol 2 — Apoyo Administrativo en Quirófano</p>
+          <ul class="func-list">
+            <li>Programación diaria de cirugías especializadas</li>
+            <li>Coordinación de actividades administrativas del área</li>
+            <li>Uso de herramientas informáticas para el control de datos</li>
+            <li>Apoyo a procesos internos del área quirúrgica</li>
+          </ul>
+        </div>
+
+        <div class="tools">
+          <span class="tool">Microsoft Excel</span>
+          <span class="tool">Sistemas de registro clínico</span>
+          <span class="tool">Gestión documental</span>
+          <span class="tool">Control de datos</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMACIÓN / TIMELINE -->
+    <section id="formacion">
+      <p class="sec-label">Historia</p>
+      <h2 class="sec-title">Línea de tiempo de formación</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#888780;"></div>
+          <p class="tl-year" style="color:#5F5E5A;">2000 – 2012</p>
+          <p class="tl-name">Niñez y educación primaria</p>
+          <p class="tl-desc">Desarrollo de habilidades sociales, creatividad y trabajo en equipo.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#888780;"></div>
+          <p class="tl-year" style="color:#5F5E5A;">2013 – 2015</p>
+          <p class="tl-name">Bachillerato</p>
+          <p class="tl-desc">Etapa de aprendizaje personal y social, primer contacto con herramientas tecnológicas.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#EF9F27;"></div>
+          <p class="tl-year" style="color:#BA7517;">2020 – 2026</p>
+          <p class="tl-name">Experiencia laboral — Centro Quirúrgico</p>
+          <p class="tl-desc">Trabajo en área administrativa hospitalaria: manejo de expedientes, programación de cirugías y control de datos con herramientas informáticas.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#378ADD;"></div>
+          <p class="tl-year" style="color:#185FA5;">2025 – presente</p>
+          <p class="tl-name">Licenciatura en Informática</p>
+          <p class="tl-desc">Inicio de formación universitaria en informática. Materias cursadas: Bases de Datos I y II, Programación, Sistemas Operativos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRABAJOS ACADÉMICOS -->
+    <section id="trabajos">
+      <p class="sec-label">Academia</p>
+      <h2 class="sec-title">Trabajos académicos</h2>
+      <div class="academic-grid">
+
+        <div class="acad-card">
+          <span class="acad-materia">Bases de Datos II</span>
+          <p class="acad-title">Modelado entidad-relación</p>
+          <p class="acad-desc">Diseño de diagramas ER aplicados a casos reales. Identificación de entidades, atributos y relaciones.</p>
+          <div class="photo-slot">
+            📷 Agrega aquí una captura<br>de tu diagrama ER<br><br>
+            <small>(reemplaza este bloque con<br>&lt;img src="diagrama-er.jpg"&gt;)</small>
+          </div>
+        </div>
+
+        <div class="acad-card">
+          <span class="acad-materia">Programación</span>
+          <p class="acad-title">Proyectos de programación</p>
+          <p class="acad-desc">Desarrollo de ejercicios y proyectos aplicando lógica de programación y resolución de problemas.</p>
+          <div class="photo-slot">
+            📷 Agrega aquí una captura<br>de tu código o proyecto<br><br>
+            <small>(reemplaza este bloque con<br>&lt;img src="prog-proyecto.jpg"&gt;)</small>
+          </div>
+        </div>
+
+        <div class="acad-card">
+          <span class="acad-materia">Sistemas Operativos</span>
+          <p class="acad-title">Prácticas de sistemas</p>
+          <p class="acad-desc">Exploración de conceptos de sistemas operativos, gestión de procesos y manejo de entornos.</p>
+          <div class="photo-slot">
+            📷 Agrega aquí capturas<br>de tus prácticas<br><br>
+            <small>(reemplaza este bloque con<br>&lt;img src="so-practica.jpg"&gt;)</small>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section id="habilidades">
+      <p class="sec-label">Competencias</p>
+      <h2 class="sec-title">Habilidades y herramientas</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <p class="skill-name">Gestión documental</p>
+          <div class="bar"><div class="bar-fill" style="width:82%; background:#1D9E75;"></div></div>
+          <p class="skill-level">Avanzado</p>
+        </div>
+        <div class="skill-card">
+          <p class="skill-name">Trabajo en equipo</p>
+          <div class="bar"><div class="bar-fill" style="width:90%; background:#1D9E75;"></div></div>
+          <p class="skill-level">Avanzado</p>
+        </div>
+        <div class="skill-card">
+          <p class="skill-name">Organización</p>
+          <div class="bar"><div class="bar-fill" style="width:85%; background:#1D9E75;"></div></div>
+          <p class="skill-level">Avanzado</p>
+        </div>
+        <div class="skill-card">
+          <p class="skill-name">Microsoft Excel</p>
+          <div class="bar"><div class="bar-fill" style="width:68%; background:#1D9E75;"></div></div>
+          <p class="skill-level">Intermedio</p>
+        </div>
+        <div class="skill-card">
+          <p class="skill-name">Bases de datos</p>
+          <div class="bar"><div class="bar-fill" style="width:45%; background:#378ADD;"></div></div>
+          <p class="skill-level">En formación</p>
+        </div>
+        <div class="skill-card">
+          <p class="skill-name">Programación</p>
+          <div class="bar"><div class="bar-fill" style="width:35%; background:#378ADD;"></div></div>
+          <p class="skill-level">En formación</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>Mónica Lourdes Ventura Mejía · Licenciatura en Informática · 2026</p>
+</footer>
+
+</body>
+</html>
